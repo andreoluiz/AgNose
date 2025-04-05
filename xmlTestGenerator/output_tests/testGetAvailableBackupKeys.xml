@@ -1,0 +1,30 @@
+<test_method name="testGetAvailableBackupKeys">
+	<statement>ObjectListing listing = new ObjectListing() {
+
+    @Override
+    public List<S3ObjectSummary> getObjectSummaries() {
+        List<S3ObjectSummary> list = Lists.newArrayList();
+        S3ObjectSummary summary = new S3ObjectSummary();
+        summary.setKey("exhibitor-backup" + S3BackupProvider.SEPARATOR + "one" + S3BackupProvider.SEPARATOR + "1234");
+        list.add(summary);
+        summary = new S3ObjectSummary();
+        summary.setKey("exhibitor-backup" + S3BackupProvider.SEPARATOR + "two" + S3BackupProvider.SEPARATOR + "1234");
+        list.add(summary);
+        summary = new S3ObjectSummary();
+        summary.setKey("exhibitor-backup" + S3BackupProvider.SEPARATOR + "three" + S3BackupProvider.SEPARATOR + "1234");
+        list.add(summary);
+        return list;
+    }
+};</statement>
+	<statement>MockS3Client s3Client = new MockS3Client(null, listing);</statement>
+	<statement>S3BackupProvider provider = new S3BackupProvider(new MockS3ClientFactory(s3Client), new PropertyBasedS3Credential(new Properties()), new PropertyBasedS3ClientConfig(new Properties()), null);</statement>
+	<statement>List<BackupMetaData> backups = provider.getAvailableBackups(null, Maps.<String, String>newHashMap());</statement>
+	<statement>List<String> backupNames = Lists.transform(backups, new Function<BackupMetaData, String>() {
+
+    @Override
+    public String apply(BackupMetaData metaData) {
+        return metaData.getName();
+    }
+});</statement>
+	<methodCall>Assert.assertEquals(backupNames, Arrays.asList("one", "two", "three"))</methodCall>
+</test_method>

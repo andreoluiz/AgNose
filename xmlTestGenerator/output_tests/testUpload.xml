@@ -1,0 +1,5 @@
+<test_method name="testUpload">
+	<statement>byte[] uploadedBytes = getUploadedBytes(sourceFile);</statement>
+	<statement>byte[] fileBytes = Files.toByteArray(sourceFile);</statement>
+	<methodCall>Assert.assertEquals(uploadedBytes, fileBytes)</methodCall>
+</test_method>

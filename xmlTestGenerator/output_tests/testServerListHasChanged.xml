@@ -1,0 +1,108 @@
+<test_method name="testServerListHasChanged">
+	<statement>InstanceConfig config = new InstanceConfig() {
+
+    @Override
+    public String getString(StringConfigs config) {
+        switch(config) {
+            case SERVERS_SPEC:
+                {
+                    return "S:1:foo,S:2:bar";
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int getInt(IntConfigs config) {
+        return 0;
+    }
+};</statement>
+	<statement>Exhibitor mockExhibitor = makeMockExhibitor(config, "foo");</statement>
+	<statement>MonitorRunningInstance monitor = new MonitorRunningInstance(mockExhibitor);</statement>
+	<statement>StateAndLeader stateAndLeader = monitor.getStateAndLeader();</statement>
+	<statement>InstanceState localCurrentInstanceState = new InstanceState(new ServerList(config.getString(StringConfigs.SERVERS_SPEC)), stateAndLeader.getState(), new RestartSignificantConfig(config));</statement>
+	<statement>InstanceConfig newConfig = new InstanceConfig() {
+
+    @Override
+    public String getString(StringConfigs config) {
+        switch(config) {
+            case SERVERS_SPEC:
+                {
+                    // observer added
+                    return "S:1:foo,S:2:bar,O:3:snafu";
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int getInt(IntConfigs config) {
+        return 0;
+    }
+};</statement>
+	<statement>InstanceState instanceState = new InstanceState(new ServerList(newConfig.getString(StringConfigs.SERVERS_SPEC)), stateAndLeader.getState(), new RestartSignificantConfig(newConfig));</statement>
+	<methodCall>Assert.assertFalse(monitor.serverListHasChanged(instanceState, localCurrentInstanceState))</methodCall>
+	<statement>newConfig = new InstanceConfig() {
+
+    @Override
+    public String getString(StringConfigs config) {
+        switch(config) {
+            case SERVERS_SPEC:
+                {
+                    // standard added
+                    return "S:1:foo,S:2:bar,S:3:snafu";
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int getInt(IntConfigs config) {
+        return 0;
+    }
+};</statement>
+	<statement>instanceState = new InstanceState(new ServerList(newConfig.getString(StringConfigs.SERVERS_SPEC)), stateAndLeader.getState(), new RestartSignificantConfig(newConfig));</statement>
+	<methodCall>Assert.assertTrue(monitor.serverListHasChanged(instanceState, localCurrentInstanceState))</methodCall>
+	<statement>newConfig = new InstanceConfig() {
+
+    @Override
+    public String getString(StringConfigs config) {
+        switch(config) {
+            case SERVERS_SPEC:
+                {
+                    // "us" changed to observer
+                    return "O:1:foo,S:2:bar";
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int getInt(IntConfigs config) {
+        return 0;
+    }
+};</statement>
+	<statement>instanceState = new InstanceState(new ServerList(newConfig.getString(StringConfigs.SERVERS_SPEC)), stateAndLeader.getState(), new RestartSignificantConfig(newConfig));</statement>
+	<methodCall>Assert.assertTrue(monitor.serverListHasChanged(instanceState, localCurrentInstanceState))</methodCall>
+	<statement>newConfig = new InstanceConfig() {
+
+    @Override
+    public String getString(StringConfigs config) {
+        switch(config) {
+            case SERVERS_SPEC:
+                {
+                    // not-us changed to observer
+                    return "S:1:foo,O:2:bar";
+                }
+        }
+        return null;
+    }
+
+    @Override
+    public int getInt(IntConfigs config) {
+        return 0;
+    }
+};</statement>
+	<statement>instanceState = new InstanceState(new ServerList(newConfig.getString(StringConfigs.SERVERS_SPEC)), stateAndLeader.getState(), new RestartSignificantConfig(newConfig));</statement>
+	<methodCall>Assert.assertTrue(monitor.serverListHasChanged(instanceState, localCurrentInstanceState))</methodCall>
+</test_method>

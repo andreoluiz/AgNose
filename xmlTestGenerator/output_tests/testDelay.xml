@@ -1,0 +1,28 @@
+<test_method name="testDelay">
+	<statement>ActivityQueue queue = new ActivityQueue();</statement>
+	<methodCall>queue.start()</methodCall>
+	<try>
+	<statement>final AtomicLong callTime = new AtomicLong();</statement>
+	<statement>final CountDownLatch latch = new CountDownLatch(1);</statement>
+	<statement>Activity activity = new Activity() {
+
+    @Override
+    public void completed(boolean wasSuccessful) {
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        callTime.set(System.nanoTime());
+        latch.countDown();
+        return true;
+    }
+};</statement>
+	<statement>long start = System.nanoTime();</statement>
+	<methodCall>queue.add(QueueGroups.MAIN, activity, 2, TimeUnit.SECONDS)</methodCall>
+	<methodCall>Assert.assertTrue(latch.await(5, TimeUnit.SECONDS))</methodCall>
+	<methodCall>Assert.assertTrue((callTime.get() - start) >= 2000000)</methodCall>
+		<finally>
+	<methodCall>CloseableUtils.closeQuietly(queue)</methodCall>
+		</finally>
+	</try>
+</test_method>

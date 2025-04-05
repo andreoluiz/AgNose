@@ -1,0 +1,34 @@
+<test_method name="testBlocking">
+	<statement>final int QTY = 5;</statement>
+	<statement>final int POLLING_MS = 1;</statement>
+	<statement>final AtomicBoolean isLocked = new AtomicBoolean(false);</statement>
+	<statement>final AtomicInteger lockCount = new AtomicInteger(0);</statement>
+	<statement>final MockS3Client client = new MockS3Client(null, null);</statement>
+	<statement>final ActivityLog mockLog = Mockito.mock(ActivityLog.class);</statement>
+	<statement>ExecutorCompletionService<Void> completionService = new ExecutorCompletionService<Void>(Executors.newFixedThreadPool(QTY));</statement>
+	<loopFor condition="[int i = 0]; i < QTY; [++i]">
+	<methodCall>completionService.submit(new Callable<Void>() {
+
+    @Override
+    public Void call() throws Exception {
+        S3PseudoLock lock = new S3PseudoLock(client, "foo", "bar", Integer.MAX_VALUE, POLLING_MS, 0);
+        try {
+            Assert.assertTrue(lock.lock(mockLog, 10, TimeUnit.SECONDS));
+            Assert.assertTrue(isLocked.compareAndSet(false, true));
+            lockCount.incrementAndGet();
+            Thread.sleep(POLLING_MS);
+        } finally {
+            if (isLocked.compareAndSet(true, false)) {
+                lock.unlock();
+            }
+        }
+        return null;
+    }
+})</methodCall>
+	<methodCall>Thread.sleep(1)</methodCall>
+	</loopFor>
+	<loopFor condition="[int i = 0]; i < QTY; [++i]">
+	<methodCall>completionService.take().get()</methodCall>
+	</loopFor>
+	<methodCall>Assert.assertEquals(lockCount.get(), QTY)</methodCall>
+</test_method>

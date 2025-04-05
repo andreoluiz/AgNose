@@ -1,0 +1,49 @@
+<test_method name="testSequential">
+	<statement>ActivityQueue queue = new ActivityQueue();</statement>
+	<methodCall>queue.start()</methodCall>
+	<try>
+	<statement>final CountDownLatch latch = new CountDownLatch(1);</statement>
+	<statement>Activity activity1 = new Activity() {
+
+    @Override
+    public void completed(boolean wasSuccessful) {
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        latch.await();
+        return true;
+    }
+};</statement>
+	<statement>final AtomicBoolean active = new AtomicBoolean(false);</statement>
+	<statement>Activity activity2 = new Activity() {
+
+    @Override
+    public void completed(boolean wasSuccessful) {
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        active.set(true);
+        return true;
+    }
+};</statement>
+	<methodCall>queue.add(QueueGroups.MAIN, activity1)</methodCall>
+	<methodCall>queue.add(QueueGroups.MAIN, activity2)</methodCall>
+	<loopFor condition="[int i = 0]; i < 10; [++i]">
+	<methodCall>Assert.assertFalse(active.get())</methodCall>
+	<methodCall>Thread.sleep(100)</methodCall>
+	</loopFor>
+	<methodCall>queue.add(QueueGroups.IO, activity2)</methodCall>
+	<loopFor condition="[int i = 0]; i < 10; [++i]">
+	<if condition="active.get()">
+	<statement>break;</statement>
+	</if>
+	<methodCall>Thread.sleep(100)</methodCall>
+	</loopFor>
+	<methodCall>Assert.assertTrue(active.get())</methodCall>
+		<finally>
+	<methodCall>CloseableUtils.closeQuietly(queue)</methodCall>
+		</finally>
+	</try>
+</test_method>

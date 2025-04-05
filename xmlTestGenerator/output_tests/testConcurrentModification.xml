@@ -1,0 +1,32 @@
+<test_method name="testConcurrentModification">
+	<statement>ZookeeperConfigProvider config1 = new ZookeeperConfigProvider(client, "/foo", new Properties(), "foo");</statement>
+	<statement>ZookeeperConfigProvider config2 = new ZookeeperConfigProvider(client, "/foo", new Properties(), "foo");</statement>
+	<try>
+	<methodCall>config1.start()</methodCall>
+	<methodCall>config2.start()</methodCall>
+	<statement>final Semaphore cacheUpdate2 = new Semaphore(0);</statement>
+	<methodCall>config2.getPathChildrenCache().getListenable().addListener(new PathChildrenCacheListener() {
+
+    @Override
+    public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+        cacheUpdate2.release();
+    }
+})</methodCall>
+	<statement>Properties properties = new Properties();</statement>
+	<methodCall>properties.setProperty(PropertyBasedInstanceConfig.toName(StringConfigs.ZOO_CFG_EXTRA, PropertyBasedInstanceConfig.ROOT_PROPERTY_PREFIX), "1,2,3")</methodCall>
+	<statement>LoadedInstanceConfig loaded1 = config1.storeConfig(new PropertyBasedInstanceConfig(properties, new Properties()), -1);</statement>
+	<methodCall>Assert.assertTrue(timing.acquireSemaphore(cacheUpdate2))</methodCall>
+	<methodCall>timing.sleepABit()</methodCall>
+	<statement>LoadedInstanceConfig loaded2 = config2.loadConfig();</statement>
+	<methodCall>Assert.assertEquals("1,2,3", loaded2.getConfig().getRootConfig().getString(StringConfigs.ZOO_CFG_EXTRA))</methodCall>
+	<methodCall>properties.setProperty(PropertyBasedInstanceConfig.toName(StringConfigs.ZOO_CFG_EXTRA, PropertyBasedInstanceConfig.ROOT_PROPERTY_PREFIX), "4,5,6")</methodCall>
+	<methodCall>config2.storeConfig(new PropertyBasedInstanceConfig(properties, new Properties()), loaded2.getVersion())</methodCall>
+	<methodCall>Assert.assertNull(config1.storeConfig(new PropertyBasedInstanceConfig(properties, new Properties()), loaded1.getVersion()))</methodCall>
+	<statement>LoadedInstanceConfig newLoaded1 = config1.loadConfig();</statement>
+	<methodCall>Assert.assertNotEquals(loaded1.getVersion(), newLoaded1.getVersion())</methodCall>
+		<finally>
+	<methodCall>CloseableUtils.closeQuietly(config2)</methodCall>
+	<methodCall>CloseableUtils.closeQuietly(config1)</methodCall>
+		</finally>
+	</try>
+</test_method>

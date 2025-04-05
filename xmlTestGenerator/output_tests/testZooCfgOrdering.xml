@@ -1,0 +1,21 @@
+<test_method name="testZooCfgOrdering">
+	<statement>final String CFG_EXTRA = "initLimit=30\n" + "syncLimit=30\n" + "tickTime=2000\n" + "aaa=test";</statement>
+	<statement>File tempDirectory = Files.createTempDir();</statement>
+	<statement>ConfigProvider config = new NoneConfigProvider(tempDirectory.getPath());</statement>
+	<statement>Properties properties = new Properties();</statement>
+	<methodCall>properties.setProperty(PropertyBasedInstanceConfig.toName(StringConfigs.ZOO_CFG_EXTRA, PropertyBasedInstanceConfig.ROOT_PROPERTY_PREFIX), CFG_EXTRA)</methodCall>
+	<statement>LoadedInstanceConfig instanceConfig = config.storeConfig(new PropertyBasedInstanceConfig(properties, new Properties()), 0);</statement>
+	<statement>String string = instanceConfig.getConfig().getRootConfig().getString(StringConfigs.ZOO_CFG_EXTRA);</statement>
+	<methodCall>Assert.assertEquals(CFG_EXTRA, string)</methodCall>
+	<statement>EncodedConfigParser parser = new EncodedConfigParser("s=10&d=dee&a=hey");</statement>
+	<methodCall>Assert.assertEquals(parser.getFieldValues().size(), 3)</methodCall>
+	<methodCall>Assert.assertEquals(parser.getFieldValues().get(0), new EncodedConfigParser.FieldValue("s", "10"))</methodCall>
+	<methodCall>Assert.assertEquals(parser.getFieldValues().get(1), new EncodedConfigParser.FieldValue("d", "dee"))</methodCall>
+	<methodCall>Assert.assertEquals(parser.getFieldValues().get(2), new EncodedConfigParser.FieldValue("a", "hey"))</methodCall>
+	<statement>Map<String, String> sortedMap = parser.getSortedMap();</statement>
+	<statement>Iterator<Map.Entry<String, String>> iterator = sortedMap.entrySet().iterator();</statement>
+	<methodCall>Assert.assertEquals(sortedMap.size(), 3)</methodCall>
+	<methodCall>Assert.assertEquals(iterator.next(), new HashMap.SimpleEntry<String, String>("a", "hey"))</methodCall>
+	<methodCall>Assert.assertEquals(iterator.next(), new HashMap.SimpleEntry<String, String>("d", "dee"))</methodCall>
+	<methodCall>Assert.assertEquals(iterator.next(), new HashMap.SimpleEntry<String, String>("s", "10"))</methodCall>
+</test_method>

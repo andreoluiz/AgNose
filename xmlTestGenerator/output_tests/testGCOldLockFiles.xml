@@ -1,0 +1,19 @@
+<test_method name="testGCOldLockFiles">
+	<statement>final BlockingQueue<String> queue = new ArrayBlockingQueue<String>(1);</statement>
+	<statement>ActivityLog mockLog = Mockito.mock(ActivityLog.class);</statement>
+	<statement>MockS3Client client = new MockS3Client(null, null) {
+
+    @Override
+    public void deleteObject(String bucket, String key) throws Exception {
+        queue.put(key);
+    }
+};</statement>
+	<statement>S3PseudoLock lock = new S3PseudoLock(client, "foo", "bar", 10, 10, 0);</statement>
+	<methodCall>lock.lock(mockLog, 1, TimeUnit.DAYS)</methodCall>
+	<methodCall>Thread.sleep(20)</methodCall>
+	<statement>S3PseudoLock lock2 = new S3PseudoLock(client, "foo", "bar", 10, 10, 0);</statement>
+	<comment> should clean the previous lock</comment>
+	<methodCall>lock2.lock(mockLog, 1, TimeUnit.DAYS)</methodCall>
+	<statement>String cleaned = queue.poll(5, TimeUnit.SECONDS);</statement>
+	<methodCall>Assert.assertNotNull(cleaned)</methodCall>
+</test_method>

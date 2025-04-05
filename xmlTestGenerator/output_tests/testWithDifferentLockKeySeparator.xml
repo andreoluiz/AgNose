@@ -1,0 +1,7 @@
+<test_method name="testWithDifferentLockKeySeparator">
+	<statement>MockS3Client client = new MockS3Client();</statement>
+	<statement>ActivityLog mockLog = Mockito.mock(ActivityLog.class);</statement>
+	<statement>S3PseudoLock lock = new S3PseudoLock(client, "foo", "bar", 10000, 1, 0, "#");</statement>
+	<methodCall>Assert.assertTrue(lock.lock(mockLog, 5, TimeUnit.SECONDS))</methodCall>
+	<methodCall>lock.unlock()</methodCall>
+</test_method>

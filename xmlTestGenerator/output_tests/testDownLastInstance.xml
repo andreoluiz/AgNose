@@ -1,0 +1,94 @@
+<test_method name="testDownLastInstance">
+	<statement>ServerList serverList = new ServerList("1:one,2:two,3:three");</statement>
+	<statement>RemoteInstanceRequestClient mockClient = new RemoteInstanceRequestClient() {
+
+    @Override
+    public void close() throws IOException {
+    }
+
+    @Override
+    public <T> T getWebResource(URI remoteUri, MediaType type, Class<T> clazz) throws Exception {
+        if (remoteUri.getHost().equals("two")) {
+            throw new Exception();
+        }
+        return clazz.cast("foo");
+    }
+};</statement>
+	<statement>ActivityLog log = new ActivityLog(100);</statement>
+	<statement>ActivityQueue activityQueue = new ActivityQueue();</statement>
+	<statement>Exhibitor mockExhibitor = Mockito.mock(Exhibitor.class);</statement>
+	<statement>MonitorRunningInstance mockMonitorRunningInstance = makeMockMonitorRunningInstance();</statement>
+	<methodCall>Mockito.when(mockExhibitor.getMonitorRunningInstance()).thenReturn(mockMonitorRunningInstance)</methodCall>
+	<methodCall>Mockito.when(mockExhibitor.getLog()).thenReturn(log)</methodCall>
+	<methodCall>Mockito.when(mockExhibitor.getActivityQueue()).thenReturn(activityQueue)</methodCall>
+	<methodCall>Mockito.when(mockExhibitor.getThisJVMHostname()).thenReturn("one")</methodCall>
+	<methodCall>Mockito.when(mockExhibitor.getRemoteInstanceRequestClient()).thenReturn(mockClient)</methodCall>
+	<statement>final AtomicLong modified = new AtomicLong(1);</statement>
+	<statement>ConfigProvider provider = new ConfigProvider() {
+
+    private volatile ConfigCollection config = new PropertyBasedInstanceConfig(new Properties(), new Properties());
+
+    @Override
+    public void start() throws Exception {
+    }
+
+    @Override
+    public void close() throws IOException {
+    }
+
+    @Override
+    public LoadedInstanceConfig loadConfig() throws Exception {
+        return new LoadedInstanceConfig(config, modified.get());
+    }
+
+    @Override
+    public PseudoLock newPseudoLock() throws Exception {
+        return null;
+    }
+
+    @Override
+    public LoadedInstanceConfig storeConfig(ConfigCollection config, long compareVersion) throws Exception {
+        this.config = config;
+        modified.incrementAndGet();
+        return loadConfig();
+    }
+};</statement>
+	<statement>InstanceState state = new InstanceState(serverList, InstanceStateTypes.SERVING, new RestartSignificantConfig(null));</statement>
+	<statement>ConfigManager manager = new ConfigManager(mockExhibitor, provider, 10);</statement>
+	<methodCall>manager.start()</methodCall>
+	<try>
+	<statement>Properties properties = new Properties();</statement>
+	<methodCall>properties.setProperty(PropertyBasedInstanceConfig.toName(StringConfigs.SERVERS_SPEC, PropertyBasedInstanceConfig.ROOT_PROPERTY_PREFIX), serverList.toSpecString())</methodCall>
+	<statement>PropertyBasedInstanceConfig config = new PropertyBasedInstanceConfig(properties, DefaultProperties.get(null));</statement>
+	<methodCall>manager.startRollingConfig(config.getRootConfig(), null)</methodCall>
+	<statement>for (String hostname : manager.getRollingConfigState().getRollingHostNames()) {
+    if (hostname.equals("two")) {
+        Assert.assertFalse(manager.isRolling());
+        continue;
+    }
+    Assert.assertTrue(manager.isRolling());
+    RollingReleaseState rollingState = new RollingReleaseState(state, manager.getCollection());
+    Assert.assertEquals(rollingState.getCurrentRollingHostname(), hostname);
+    Assert.assertNull(manager.getRollingConfigAdvanceAttempt());
+    Mockito.when(mockExhibitor.getThisJVMHostname()).thenReturn(hostname);
+    long lastModified = modified.get();
+    manager.checkRollingConfig(state);
+    if (// the next will be the down instance "two"
+    hostname.equals("three")) {
+        for (// don't check last time as it's cleared on MAX
+        int i = 1; // don't check last time as it's cleared on MAX
+        i < ConfigManager.DEFAULT_MAX_ATTEMPTS; // don't check last time as it's cleared on MAX
+        ++i) {
+            Assert.assertNotNull(manager.getRollingConfigAdvanceAttempt());
+            Assert.assertEquals(manager.getRollingConfigAdvanceAttempt().getAttemptCount(), i);
+            manager.checkRollingConfig(state);
+        }
+    }
+    Assert.assertTrue(modified.get() > lastModified);
+}</statement>
+	<methodCall>Assert.assertFalse(manager.isRolling())</methodCall>
+		<finally>
+	<methodCall>CloseableUtils.closeQuietly(manager)</methodCall>
+		</finally>
+	</try>
+</test_method>

@@ -1,0 +1,6 @@
+<test_method name="testSpecString">
+	<statement>ServerSpec s1 = new ServerSpec("host", 1, ServerType.STANDARD);</statement>
+	<statement>ServerSpec s2 = new ServerSpec("host", 2, ServerType.OBSERVER);</statement>
+	<methodCall>Assert.assertEquals(s1.toSpecString(), "1:host")</methodCall>
+	<methodCall>Assert.assertEquals(s2.toSpecString(), "O:2:host")</methodCall>
+</test_method>

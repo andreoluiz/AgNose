@@ -1,0 +1,28 @@
+<test_method name="test">
+	<statement>final CountDownLatch latch = new CountDownLatch(2);</statement>
+	<statement>final ReentrantLock lock = new ReentrantLock();</statement>
+	<statement>Thread t1 = new Thread(new Runnable() {
+
+    @Override
+    public void run() {
+        lock.lock();
+        latch.countDown();
+    }
+});</statement>
+	<statement>Thread t2 = new Thread(new Runnable() {
+
+    @Override
+    public void run() {
+        lock.lock();
+        latch.countDown();
+    }
+});</statement>
+	<methodCall>t1.start()</methodCall>
+	<methodCall>t2.start()</methodCall>
+	<if condition="latch.await(10, TimeUnit.SECONDS)">
+	<print>"yep"</print>
+	<else>
+	<print>"nope"</print>
+	</else>
+	</if>
+</test_method>
