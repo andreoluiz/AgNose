@@ -4,11 +4,11 @@ AgNose é uma ferramenta para análise automatizada de testes que converte códi
 
 🧠 Funcionalidades:
 
-✅ Conversão de código de teste para XML com marcações otimizadas.
+Conversão de código de teste para XML com marcações otimizadas.
 
-🔍 Detecção automatizada de test smells diretamente nos arquivos XML.
+Detecção automatizada de test smells diretamente nos arquivos XML.
 
-📊 Relatórios estruturados que facilitam a visualização dos problemas detectados.
+Relatórios estruturados que facilitam a visualização dos problemas detectados.
 
 🧪 Test Smells Detectáveis
 
