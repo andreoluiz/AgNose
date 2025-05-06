@@ -9,3 +9,17 @@ AgNose é uma ferramenta para análise automatizada de testes que converte códi
 🔍 Detecção automatizada de test smells diretamente nos arquivos XML.
 
 📊 Relatórios estruturados que facilitam a visualização dos problemas detectados.
+
+🧪 Test Smells Detectáveis
+
+Redundant Print
+
+Unknown Test
+
+Empty Test
+
+Duplicated Assert
+
+Assertion Roulette
+
+Conditional Test
