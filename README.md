@@ -23,3 +23,7 @@ Duplicated Assert
 Assertion Roulette
 
 Conditional Test
+
+🙌 Contribuições
+
+Contribuições são bem-vindas!
