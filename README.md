@@ -26,6 +26,8 @@ Conditional Test
 
 Magic Number
 
+Exception Handling
+
 🙌 Contribuições
 
 Contribuições são bem-vindas!
