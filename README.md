@@ -24,6 +24,8 @@ Assertion Roulette
 
 Conditional Test
 
+Magic Number
+
 🙌 Contribuições
 
 Contribuições são bem-vindas!
