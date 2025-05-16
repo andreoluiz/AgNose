@@ -4,8 +4,8 @@ import re
 import csv
 
 class Detector:
-    def __init__(self):
-        self.folder = r'C:\Users\Denix\Documents\Agnose\saida'
+    def __init__(self,dir):
+        self.folder = rf"{str(dir)+"\saida"}"
         self.csv_file = 'output.csv'
         self.read_xml_files_from_folder()
 
