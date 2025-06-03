@@ -1,15 +1,33 @@
 import tkinter as tk
 from tkinter import ttk
 import csv
-from pathlib import Path
 
 class CSVViewerApp:
     def __init__(self, caminho_csv):
-        
         root = tk.Tk()
         self.root = root
         self.root.title("AgNose")
         self.root.geometry("600x400")
+
+        # ======= ESTILO PARA A TABELA ========
+        style = ttk.Style()
+        style.theme_use("default")  # você pode usar 'clam' ou outro se preferir
+
+        style.configure("Treeview",
+                        background="#f8f8f8",
+                        foreground="#333333",
+                        rowheight=25,
+                        fieldbackground="#f8f8f8",
+                        font=("Segoe UI", 10))
+
+        style.configure("Treeview.Heading",
+                        background="#4a7a8c",
+                        foreground="white",
+                        font=("Segoe UI", 10, "bold"))
+
+        style.map("Treeview",
+                  background=[("selected", "#6fa3bf")],
+                  foreground=[("selected", "white")])
 
         # Frame de controle
         frame_topo = ttk.Frame(root)
@@ -32,7 +50,8 @@ class CSVViewerApp:
         self.tree = ttk.Treeview(
             frame_tabela,
             yscrollcommand=self.scroll_y.set,
-            xscrollcommand=self.scroll_x.set
+            xscrollcommand=self.scroll_x.set,
+            show="headings"
         )
 
         self.scroll_y.config(command=self.tree.yview)
@@ -71,8 +90,13 @@ class CSVViewerApp:
 
     def preencher_tabela(self, linhas):
         self.tree.delete(*self.tree.get_children())
-        for linha in linhas:
-            self.tree.insert("", "end", values=linha)
+        for i, linha in enumerate(linhas):
+            tag = "par" if i % 2 == 0 else "impar"
+            self.tree.insert("", "end", values=linha, tags=(tag,))
+
+        # Estilo alternado de linhas
+        self.tree.tag_configure("par", background="#ffffff")
+        self.tree.tag_configure("impar", background="#e6f2f5")
 
     def filtrar_linhas(self):
         termo = self.entrada_busca.get().lower().strip()
