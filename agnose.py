@@ -48,18 +48,12 @@ class Domain:
 
             # Chamada do Detector
             Detector.Detector(dir_atual)
-            CSVViewerApp(rf"{dir_atual}\output.csv")
+            CSVViewerApp(caminho_csv=rf"{dir_atual}\output.csv", caminho_icon= rf"{dir_arc}\agnose.png")
 
         except Exception as e:
             print(f"Erro na execução do gerador: {e}")
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser(description="Ferramenta de geração e análise XML - Agnose")
-    # parser.add_argument("caminho", help="Caminho do diretório do projeto")
-    # args = parser.parse_args()
+    Domain.createGenerator()
 
-    # if os.path.exists(args.caminho):
-        Domain.createGenerator()
-    # else:  
-    #     print("Caminho inválido. Verifique e tente novamente.")
 

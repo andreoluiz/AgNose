@@ -40,7 +40,7 @@ public class XmlTestConversor {
     }
 
     private static void processFilesRecursively(File directory, File outputDirectory) {
-        File[] files = directory.listFiles((File dir, String name) -> name.endsWith(".java"));
+        File[] files = directory.listFiles(file -> file.isFile() && file.getName().endsWith(".java"));
         if (files != null) {
             for (File file : files) {
                 try {

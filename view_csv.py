@@ -3,15 +3,14 @@ from tkinter import ttk
 import csv
 
 class CSVViewerApp:
-    def __init__(self, caminho_csv):
+    def __init__(self, caminho_csv, caminho_icon):
         root = tk.Tk()
         self.root = root
+        self.root.iconbitmap(rf"{caminho_icon[:-3]}ico")
         self.root.title("AgNose")
         self.root.geometry("600x400")
-
-        # ======= ESTILO PARA A TABELA ========
         style = ttk.Style()
-        style.theme_use("default")  # você pode usar 'clam' ou outro se preferir
+        style.theme_use("clam")  # você pode usar 'clam' ou outro se preferir
 
         style.configure("Treeview",
                         background="#f8f8f8",
@@ -30,15 +29,23 @@ class CSVViewerApp:
                   foreground=[("selected", "white")])
 
         # Frame de controle
+        # Frame de controle
         frame_topo = ttk.Frame(root)
         frame_topo.pack(fill="x", padx=10, pady=5)
+
+        # Carrega imagem já pequena (ex: 20x20)
+        self.imagem_info = tk.PhotoImage(file=caminho_icon)
+
+        label_imagem = ttk.Label(frame_topo, image=self.imagem_info)
+        label_imagem.pack(side="left", padx=(0, 5))
 
         self.entrada_busca = ttk.Entry(frame_topo)
         self.entrada_busca.pack(side="left", expand=True, fill="x", padx=5)
         self.entrada_busca.insert(0, "Buscar...")
 
         botao_filtrar = ttk.Button(frame_topo, text="Filtrar", command=self.filtrar_linhas)
-        botao_filtrar.pack(side="left", padx=5)
+        botao_filtrar.pack(side="left", padx=(5, 0))
+
 
         # Frame da tabela e scroll
         frame_tabela = ttk.Frame(root)
