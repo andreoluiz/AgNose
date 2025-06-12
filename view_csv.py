@@ -2,6 +2,42 @@ import tkinter as tk
 from tkinter import ttk
 import csv
 
+class PlaceholderEntry(ttk.Entry):
+    def __init__(self, master=None, placeholder="", style_normal="TEntry", style_placeholder="Placeholder.TEntry", **kwargs):
+        self.placeholder = placeholder
+        self.style_normal = style_normal
+        self.style_placeholder = style_placeholder
+        
+        style = ttk.Style(master)
+        style.configure(style_normal, foreground="black")
+        style.configure(style_placeholder, foreground="grey")
+        
+        super().__init__(master, style=style_placeholder, **kwargs)
+        
+        self.insert(0, self.placeholder)
+        self._has_placeholder = True
+        
+        self.bind("<FocusIn>", self._on_focus_in)
+        self.bind("<FocusOut>", self._on_focus_out)
+
+    def _on_focus_in(self, event):
+        if self._has_placeholder:
+            self.delete(0, tk.END)
+            self.configure(style=self.style_normal)
+            self._has_placeholder = False
+
+    def _on_focus_out(self, event):
+        if not self.get():
+            self.insert(0, self.placeholder)
+            self.configure(style=self.style_placeholder)
+            self._has_placeholder = True
+
+    def get(self):
+        if self._has_placeholder:
+            return ""
+        else:
+            return super().get()
+
 class CSVViewerApp:
     def __init__(self, caminho_csv, caminho_icon):
         root = tk.Tk()
@@ -10,7 +46,7 @@ class CSVViewerApp:
         self.root.title("AgNose")
         self.root.geometry("600x400")
         style = ttk.Style()
-        style.theme_use("clam")  # você pode usar 'clam' ou outro se preferir
+        style.theme_use("clam")
 
         style.configure("Treeview",
                         background="#f8f8f8",
@@ -28,26 +64,22 @@ class CSVViewerApp:
                   background=[("selected", "#6fa3bf")],
                   foreground=[("selected", "white")])
 
-        # Frame de controle
-        # Frame de controle
         frame_topo = ttk.Frame(root)
         frame_topo.pack(fill="x", padx=10, pady=5)
 
-        # Carrega imagem já pequena (ex: 20x20)
         self.imagem_info = tk.PhotoImage(file=caminho_icon)
-
         label_imagem = ttk.Label(frame_topo, image=self.imagem_info)
         label_imagem.pack(side="left", padx=(0, 5))
 
-        self.entrada_busca = ttk.Entry(frame_topo)
+        self.entrada_busca = PlaceholderEntry(frame_topo, placeholder="Buscar...")
         self.entrada_busca.pack(side="left", expand=True, fill="x", padx=5)
-        self.entrada_busca.insert(0, "Buscar...")
+        # Atualiza a tabela ao digitar (sem botão)
+        self.entrada_busca.bind("<KeyRelease>", lambda event: self.filtrar_linhas())
 
-        botao_filtrar = ttk.Button(frame_topo, text="Filtrar", command=self.filtrar_linhas)
-        botao_filtrar.pack(side="left", padx=(5, 0))
+        # Botão removido (não usamos mais)
+        # botao_filtrar = ttk.Button(frame_topo, text="Filtrar", command=self.filtrar_linhas)
+        # botao_filtrar.pack(side="left", padx=(5, 0))
 
-
-        # Frame da tabela e scroll
         frame_tabela = ttk.Frame(root)
         frame_tabela.pack(expand=True, fill="both", padx=10, pady=5)
 
@@ -71,7 +103,6 @@ class CSVViewerApp:
 
         self.linhas_originais = []
 
-        # Carrega o CSV assim que o app inicia
         self.carregar_csv(caminho_csv)
         root.mainloop()
 
@@ -101,13 +132,12 @@ class CSVViewerApp:
             tag = "par" if i % 2 == 0 else "impar"
             self.tree.insert("", "end", values=linha, tags=(tag,))
 
-        # Estilo alternado de linhas
         self.tree.tag_configure("par", background="#ffffff")
         self.tree.tag_configure("impar", background="#e6f2f5")
 
     def filtrar_linhas(self):
         termo = self.entrada_busca.get().lower().strip()
-        if not termo or termo == "buscar...":
+        if not termo:
             self.preencher_tabela(self.linhas_originais)
             return
 

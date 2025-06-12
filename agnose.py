@@ -4,6 +4,7 @@ import os
 from XmellDetector import Detector
 from pathlib import Path
 from view_csv import CSVViewerApp
+from xmlTestGeneratorPython import xmlTestGenerator
 
 class Domain:
     @staticmethod
@@ -14,6 +15,8 @@ class Domain:
 
             # Diretório atual
             dir_atual = os.getcwd()
+
+            xmlTestGenerator.process_directory(rf"{dir_atual}", "saida")
 
             # Caminho para o arquivo Java
             java_file = os.path.join(
