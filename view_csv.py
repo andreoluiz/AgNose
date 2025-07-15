@@ -7,16 +7,16 @@ class PlaceholderEntry(ttk.Entry):
         self.placeholder = placeholder
         self.style_normal = style_normal
         self.style_placeholder = style_placeholder
-        
+
         style = ttk.Style(master)
         style.configure(style_normal, foreground="black")
         style.configure(style_placeholder, foreground="grey")
-        
+
         super().__init__(master, style=style_placeholder, **kwargs)
-        
+
         self.insert(0, self.placeholder)
         self._has_placeholder = True
-        
+
         self.bind("<FocusIn>", self._on_focus_in)
         self.bind("<FocusOut>", self._on_focus_out)
 
@@ -73,12 +73,7 @@ class CSVViewerApp:
 
         self.entrada_busca = PlaceholderEntry(frame_topo, placeholder="Buscar...")
         self.entrada_busca.pack(side="left", expand=True, fill="x", padx=5)
-        # Atualiza a tabela ao digitar (sem botão)
         self.entrada_busca.bind("<KeyRelease>", lambda event: self.filtrar_linhas())
-
-        # Botão removido (não usamos mais)
-        # botao_filtrar = ttk.Button(frame_topo, text="Filtrar", command=self.filtrar_linhas)
-        # botao_filtrar.pack(side="left", padx=(5, 0))
 
         frame_tabela = ttk.Frame(root)
         frame_tabela.pack(expand=True, fill="both", padx=10, pady=5)
@@ -102,6 +97,8 @@ class CSVViewerApp:
         self.tree.pack(expand=True, fill="both")
 
         self.linhas_originais = []
+        self.ordem_colunas = {}  # ← Novo: estado de ordenação por coluna
+        self.colunas = []
 
         self.carregar_csv(caminho_csv)
         root.mainloop()
@@ -110,14 +107,14 @@ class CSVViewerApp:
         try:
             with open(caminho, newline='', encoding='utf-8') as csvfile:
                 leitor = csv.reader(csvfile)
-                colunas = next(leitor)
+                self.colunas = next(leitor)
 
                 self.tree.delete(*self.tree.get_children())
-                self.tree["columns"] = colunas
+                self.tree["columns"] = self.colunas
                 self.tree["show"] = "headings"
 
-                for col in colunas:
-                    self.tree.heading(col, text=col)
+                for col in self.colunas:
+                    self.tree.heading(col, text=col, command=lambda c=col: self.ordenar_por_coluna(c))
                     self.tree.column(col, anchor="center", width=120)
 
                 self.linhas_originais = list(leitor)
@@ -131,7 +128,6 @@ class CSVViewerApp:
         for i, linha in enumerate(linhas):
             tag = "par" if i % 2 == 0 else "impar"
             self.tree.insert("", "end", values=linha, tags=(tag,))
-
         self.tree.tag_configure("par", background="#ffffff")
         self.tree.tag_configure("impar", background="#e6f2f5")
 
@@ -146,3 +142,31 @@ class CSVViewerApp:
             if any(termo in str(celula).lower() for celula in linha)
         ]
         self.preencher_tabela(linhas_filtradas)
+
+    def ordenar_por_coluna(self, coluna):
+        try:
+            idx_coluna = self.colunas.index(coluna)
+            ordem_atual = self.ordem_colunas.get(coluna, "asc")
+
+            linhas = self.tree.get_children()
+            dados = [self.tree.item(linha)["values"] for linha in linhas]
+
+            try:
+                dados.sort(key=lambda x: float(x[idx_coluna]), reverse=(ordem_atual == "desc"))
+            except ValueError:
+                dados.sort(key=lambda x: str(x[idx_coluna]).lower(), reverse=(ordem_atual == "desc"))
+
+            nova_ordem = "desc" if ordem_atual == "asc" else "asc"
+            self.ordem_colunas[coluna] = nova_ordem
+
+            # Atualiza título do cabeçalho com a seta
+            for col in self.colunas:
+                seta = ""
+                if col == coluna:
+                    seta = " ↓" if nova_ordem == "desc" else " ↑"
+                self.tree.heading(col, text=col + seta, command=lambda c=col: self.ordenar_por_coluna(c))
+
+            self.preencher_tabela(dados)
+
+        except Exception as e:
+            print(f"Erro ao ordenar a coluna {coluna}: {e}")

@@ -19,7 +19,8 @@ def extract_test_info(node, file_path):
     method_elem = ET.Element("test_method", name=node.name)
     ET.SubElement(method_elem, "file_path").text = file_path
 
-    if not node.body:
+    # Verifica se o método é vazio ou contém apenas 'pass'
+    if not node.body or (len(node.body) == 1 and isinstance(node.body[0], ast.Pass)):
         ET.SubElement(method_elem, "empty")
     else:
         for stmt in node.body:
@@ -98,6 +99,7 @@ def process_call(call_node, parent_elem):
 def process_assert_function(name, call_node, parent_elem):
     args = call_node.args
     xml_name_map = {
+        "assert": "assertEquals",
         "assertEqual": "assertEquals",
         "assertNotEqual": "assertNotEquals",
         "assertListEqual": "assertArrayEquals",
@@ -135,9 +137,9 @@ def process_assert_stmt(stmt, parent_elem):
     cond_str = ast.unparse(stmt.test)
     attribs = {"condition": cond_str}
     if stmt.msg:
-        msg_xml = node_to_xml(stmt.msg)[0]  # pega o primeiro elemento da lista
+        msg_xml = node_to_xml(stmt.msg)[0]
         attribs["message"] = xml_fragment_to_string(msg_xml)
-    ET.SubElement(parent_elem, "assert", attribs)
+    ET.SubElement(parent_elem, "assertEquals", attribs)
 
 def process_statement(stmt, parent_elem):
     if isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Call):
