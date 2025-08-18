@@ -125,11 +125,26 @@ class CSVViewerApp:
 
     def preencher_tabela(self, linhas):
         self.tree.delete(*self.tree.get_children())
+
         for i, linha in enumerate(linhas):
+            # alterna fundo da linha (par/impar)
             tag = "par" if i % 2 == 0 else "impar"
-            self.tree.insert("", "end", values=linha, tags=(tag,))
+
+            # insere a linha
+            item_id = self.tree.insert("", "end", values=linha, tags=(tag,))
+
+            # Agora percorre célula por célula para aplicar destaque
+            for j, valor in enumerate(linha):
+                if str(valor).lower() == "yes" or (str(valor).isdigit() and int(valor) != 0):
+                    # cria uma tag única para essa célula
+                    tag_name = f"cell_{i}_{j}"
+                    self.tree.tag_configure(tag_name, foreground="red")
+                    self.tree.item(item_id, tags=(tag, tag_name))
+
+        # mantém estilo de zebra
         self.tree.tag_configure("par", background="#ffffff")
         self.tree.tag_configure("impar", background="#e6f2f5")
+
 
     def filtrar_linhas(self):
         termo = self.entrada_busca.get().lower().strip()

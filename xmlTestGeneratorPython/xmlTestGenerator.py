@@ -208,8 +208,8 @@ def process_directory(input_dir, output_dir):
                 except SyntaxError as e:
                     print(f"Erro de sintaxe em {path}: {e}")
 
-if __name__ == "__main__":
-    output_dir = "saida"
-    input_dir = r"C:\Users\Denix\Documents\Agnose\teste"
-    process_directory(input_dir, output_dir)
-    print("Conversão concluída.")
+# if __name__ == "__main__":
+#     output_dir = "saida"
+#     input_dir = r"C:\Users\Denix\Documents\Agnose\teste"
+#     process_directory(input_dir, output_dir)
+#     print("Conversão concluída.")

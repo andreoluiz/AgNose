@@ -1,2 +1,4 @@
 @echo off
-python "C:\Users\Denix\Documents\Agnose\AgNose\agnose.py" %*
+set REPO_PATH=%~dp0
+python "%REPO_PATH%agnose.py" %*
+

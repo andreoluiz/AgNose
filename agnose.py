@@ -25,7 +25,7 @@ class Domain:
 
             # Caminho para o JAR do JavaParser
             javaparser_jar = os.path.join(
-                "C:", os.sep, "Users", "Denix", ".m2", "repository", "com", "github", "javaparser",
+                dir_arc, "xmlTestGenerator","target","maven-status","javaparser",
                 "javaparser-core", "3.25.10", "javaparser-core-3.25.10.jar"
             )
 
