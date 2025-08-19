@@ -39,7 +39,6 @@ Contribuições são bem-vindas!
 
 Modo de uso: 
 
-Substitua a CLASSPATH do java parse no arquivo "agnose.py" para o diretório atual em sua máquina.
 Em sua pasta de teste, rode o agnose.py (ou digite o caminho para o arquivo). 
 Ele irá gerar os arquivos XML para cada teste além de gerar um CSV com todos os Smeels indentificados.
 
