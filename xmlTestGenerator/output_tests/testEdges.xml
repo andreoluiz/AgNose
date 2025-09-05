@@ -1,6 +1,0 @@
-<test_method name="testEdges">
-	<statement>ServerList serverList = new ServerList("1:a,,,a,asfklasf,L:1x30,:*&*,$:$");</statement>
-	<methodCall>Assert.assertEquals(serverList.getSpecs(), Arrays.asList(new ServerSpec("a", 1, STANDARD)))</methodCall>
-	<statement>serverList = new ServerList("1 :a    , 2 :    b \t\t,     , : ,");</statement>
-	<methodCall>Assert.assertEquals(serverList.getSpecs(), Arrays.asList(new ServerSpec("a", 1, STANDARD), new ServerSpec("b", 2, STANDARD)))</methodCall>
-</test_method>

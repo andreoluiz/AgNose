@@ -98,7 +98,7 @@ def process_statement(stmt, parent):
     elif isinstance(stmt, ast.Assert):
         process_assert(stmt, parent)
     elif isinstance(stmt, (ast.If, ast.While, ast.For, ast.Try)):
-        tag_map={ast.If:"If",ast.While:"loopFor",ast.For:"For",ast.Try:"try"}
+        tag_map={ast.If:"If",ast.While:"loopFor",ast.For:"LoopFor",ast.Try:"try"}
         tag = tag_map[type(stmt)]
         cond = getattr(stmt,"test",getattr(stmt,"target",None))
         elem = ET.SubElement(parent, tag, condition=ast.unparse(cond) if cond else "")

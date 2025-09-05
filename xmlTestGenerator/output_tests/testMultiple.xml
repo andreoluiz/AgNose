@@ -1,3 +1,0 @@
-<test_method name="testMultiple">
-	<methodCall>internalTest(3)</methodCall>
-</test_method>
