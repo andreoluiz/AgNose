@@ -1,6 +1,6 @@
 import subprocess
 import os
-import sys  # <--- MUDANÇA 1: Necessário para ler argumentos do terminal
+import sys
 from XmellDetector import Detector
 from pathlib import Path
 from view_csv import CSVViewerApp
