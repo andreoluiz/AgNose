@@ -31,13 +31,9 @@ Essa abordagem **reduz o acoplamento com frameworks específicos** e **evita o r
 
 ## 🤝 Contribuições
 
-Exception Handling
-
-🙌 Contribuições
-
 Contribuições são bem-vindas!
 
-Modo de uso: 
+## Modo de uso: 
 
 Em sua pasta de teste, rode o agnose.py (ou digite o caminho para o arquivo). 
 Ele irá gerar os arquivos XML para cada teste além de gerar um CSV com todos os Smeels indentificados.
