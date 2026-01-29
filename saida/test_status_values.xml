@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_status_values">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;JobStatus.PENDING&lt;/expr&gt;" actual="&lt;literalString&gt;pending&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;JobStatus.IN_PROGRESS&lt;/expr&gt;" actual="&lt;literalString&gt;in_progress&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;JobStatus.COMPLETED&lt;/expr&gt;" actual="&lt;literalString&gt;completed&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;JobStatus.FAILED&lt;/expr&gt;" actual="&lt;literalString&gt;failed&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;JobStatus.CANCELLED&lt;/expr&gt;" actual="&lt;literalString&gt;cancelled&lt;/literalString&gt;" />
+</test_method>

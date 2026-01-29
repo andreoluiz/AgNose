@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_none_vs_latent2rgb_preview_count">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_preview_method.py</file_path>
+  <assertEquals actual="&lt;expr&gt;results['none']['completed']&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;results['latent2rgb']['completed']&lt;/expr&gt;" />
+  <assertEquals expected="&lt;expr&gt;results['none']['preview_count']&lt;/expr&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;expr&gt;f&quot;'none' should have 0 previews, got {results['none']['preview_count']}&quot;&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;results['latent2rgb']['preview_count']&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+</test_method>

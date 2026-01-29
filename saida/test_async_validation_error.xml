@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_validation_error">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals expected="&lt;expr&gt;exc_info.value.code&lt;/expr&gt;" actual="&lt;literalNumber&gt;400&lt;/literalNumber&gt;" />
+</test_method>

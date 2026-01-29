@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_mixed_sync_async_execution">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;sync_op1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;async_op1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;sync_op2&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;async_op2&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;abs&quot;&gt;&lt;expr&gt;avg_value&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;63.75&lt;/literalNumber&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;5&lt;/literalNumber&gt;" />
+</test_method>

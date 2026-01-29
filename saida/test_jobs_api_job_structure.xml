@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_jobs_api_job_structure">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;jobs_response['jobs']&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+  <assertEquals actual="&lt;literalString&gt;id&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;status&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;create_time&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;outputs_count&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;preview_output&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+</test_method>

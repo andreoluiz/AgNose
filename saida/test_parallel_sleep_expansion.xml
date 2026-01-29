@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_parallel_sleep_expansion">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <If condition="not skip_timing_checks">
+    <assertEquals actual="&lt;expr&gt;elapsed_time&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;13.0&lt;/literalNumber&gt;" />
+  </If>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;parallel_sleep&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;result_images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 1 image&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;avg_value&lt;/expr&gt;" actual="&lt;literalNumber&gt;170&lt;/literalNumber&gt;" message="&lt;expr&gt;f'Image average value {avg_value} should be 170'&lt;/expr&gt;" />
+</test_method>

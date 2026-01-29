@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_offset_returns_different_items_than_beginning_of_history">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <LoopFor condition="_" />
+  <assertEquals actual="&lt;call function=&quot;set(first_two.keys()).isdisjoint&quot;&gt;&lt;call function=&quot;set&quot;&gt;&lt;call function=&quot;next_two.keys&quot; /&gt;&lt;/call&gt;&lt;/call&gt;" />
+</test_method>

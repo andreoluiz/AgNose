@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_sort_by_create_time_desc">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;[j['id'] for j in result]&lt;/expr&gt;" actual="&lt;list&gt;&lt;literalString&gt;b&lt;/literalString&gt;&lt;literalString&gt;c&lt;/literalString&gt;&lt;literalString&gt;a&lt;/literalString&gt;&lt;/list&gt;" />
+</test_method>

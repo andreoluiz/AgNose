@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_execution_with_latent2rgb">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_preview_method.py</file_path>
+  <assertEquals actual="&lt;literalString&gt;prompt_id&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;response&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;result['completed'] or result['error'] is not None&lt;/expr&gt;" />
+  <If condition="result['completed']">
+    <assertEquals actual="&lt;expr&gt;result['execution_time']&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0.5&lt;/literalNumber&gt;" />
+  </If>
+</test_method>

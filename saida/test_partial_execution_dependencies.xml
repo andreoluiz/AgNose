@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_partial_execution_dependencies">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;input1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;output_with_socket&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;dependent_node&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;final_output&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

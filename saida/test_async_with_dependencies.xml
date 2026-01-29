@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_with_dependencies">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals actual="&lt;expr&gt;result.did_run(sleep1) and result.did_run(sleep2)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;result.did_run(average) and result.did_run(output)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;call function=&quot;abs&quot;&gt;&lt;expr&gt;avg_value&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;127.5&lt;/literalNumber&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;1&lt;/literalNumber&gt;" />
+</test_method>

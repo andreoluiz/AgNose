@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_cancellation">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+</test_method>

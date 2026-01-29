@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_3d_extensions_previewable">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <LoopFor condition="ext">
+    <assertEquals actual="&lt;call function=&quot;is_previewable&quot;&gt;&lt;literalString&gt;files&lt;/literalString&gt;&lt;expr&gt;item&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;True&lt;/literalNumber&gt;" />
+  </LoopFor>
+</test_method>

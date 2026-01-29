@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_preview_prefers_type_output">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;count&lt;/expr&gt;" actual="&lt;literalNumber&gt;2&lt;/literalNumber&gt;" />
+  <assertEquals expected="&lt;expr&gt;preview['filename']&lt;/expr&gt;" actual="&lt;literalString&gt;output.png&lt;/literalString&gt;" />
+</test_method>

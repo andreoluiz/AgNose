@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_jobs_api_pagination">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <LoopFor condition="_" />
+  <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;first_page['jobs']&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;2&lt;/literalNumber&gt;" />
+  <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;second_page['jobs']&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;2&lt;/literalNumber&gt;" />
+  <assertEquals actual="&lt;call function=&quot;first_ids.isdisjoint&quot;&gt;&lt;expr&gt;second_ids&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

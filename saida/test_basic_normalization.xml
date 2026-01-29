@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_basic_normalization">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;job['id']&lt;/expr&gt;" actual="&lt;literalString&gt;prompt-123&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['status']&lt;/expr&gt;" actual="&lt;literalString&gt;pending&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['priority']&lt;/expr&gt;" actual="&lt;literalNumber&gt;10&lt;/literalNumber&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['create_time']&lt;/expr&gt;" actual="&lt;literalNumber&gt;1234567890&lt;/literalNumber&gt;" />
+  <assertEquals actual="&lt;literalString&gt;execution_start_time&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;execution_end_time&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;execution_error&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals actual="&lt;literalString&gt;preview_output&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['outputs_count']&lt;/expr&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['workflow_id']&lt;/expr&gt;" actual="&lt;literalString&gt;workflow-abc&lt;/literalString&gt;" />
+</test_method>

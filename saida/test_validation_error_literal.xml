@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_validation_error_literal">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <If condition="expect_error">
+    <Else />
+  </If>
+</test_method>

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_counts_across_multiple_nodes">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;count&lt;/expr&gt;" actual="&lt;literalNumber&gt;4&lt;/literalNumber&gt;" />
+</test_method>

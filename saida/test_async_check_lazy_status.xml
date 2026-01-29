@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_check_lazy_status">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;lazy_node&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

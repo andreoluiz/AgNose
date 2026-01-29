@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_format_mime_type_previewable">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <LoopFor condition="fmt">
+    <assertEquals actual="&lt;expr&gt;preview&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literal&gt;None&lt;/literal&gt;" />
+  </LoopFor>
+</test_method>

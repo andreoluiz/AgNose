@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_sync_error_during_async_execution">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <try condition="">
+    <assertEquals actual="&lt;literalNumber&gt;False&lt;/literalNumber&gt;" />
+    <catch type="Exception">
+      <assertEquals actual="&lt;literalString&gt;prompt_id&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;e.args[0]&lt;/expr&gt;" />
+    </catch>
+  </try>
+</test_method>

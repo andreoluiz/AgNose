@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_jobs_api_preview_output_structure">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <If condition="job['preview_output'] is not None">
+    <assertEquals actual="&lt;literalString&gt;filename&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;preview&lt;/expr&gt;" />
+    <assertEquals actual="&lt;literalString&gt;nodeId&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;preview&lt;/expr&gt;" />
+    <assertEquals actual="&lt;literalString&gt;mediaType&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;preview&lt;/expr&gt;" />
+  </If>
+</test_method>

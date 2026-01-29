@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_partial_execution_empty_list">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <try condition="">
+    <assertEquals actual="&lt;literalNumber&gt;False&lt;/literalNumber&gt;" />
+    <catch type="urllib.error.HTTPError" />
+  </try>
+</test_method>

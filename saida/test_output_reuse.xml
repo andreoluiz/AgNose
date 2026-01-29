@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_output_reuse">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images1&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 1 image&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images2&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 1 image&lt;/literalString&gt;" />
+</test_method>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_partial_execution_included_outputs">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;input1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;output1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(input2)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(output2)&lt;/expr&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;call function=&quot;result.get_images&quot;&gt;&lt;expr&gt;output1&lt;/expr&gt;&lt;/call&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Output1 should have produced an image&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;call function=&quot;result.get_images&quot;&gt;&lt;expr&gt;output2&lt;/expr&gt;&lt;/call&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;literalString&gt;Output2 should not have produced an image&lt;/literalString&gt;" />
+</test_method>

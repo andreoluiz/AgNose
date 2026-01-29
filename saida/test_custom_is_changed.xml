@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_custom_is_changed">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result1.did_run&quot;&gt;&lt;expr&gt;is_changed&lt;/expr&gt;&lt;/call&gt;" />
+  <If condition="server['should_cache_results']">
+    <assertEquals actual="&lt;expr&gt;not result2.did_run(is_changed)&lt;/expr&gt;" />
+    <Else>
+      <assertEquals actual="&lt;call function=&quot;result2.did_run&quot;&gt;&lt;expr&gt;is_changed&lt;/expr&gt;&lt;/call&gt;" />
+    </Else>
+  </If>
+  <assertEquals actual="&lt;call function=&quot;result3.did_run&quot;&gt;&lt;expr&gt;is_changed&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result4.did_run&quot;&gt;&lt;expr&gt;is_changed&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

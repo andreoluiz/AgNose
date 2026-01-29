@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_progress_isolation_between_clients">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_progress_isolation.py</file_path>
+  <try condition="">
+    <assertEquals actual="&lt;expr&gt;not client_a.progress_tracker.has_cross_contamination(prompt_id_a)&lt;/expr&gt;" />
+    <assertEquals actual="&lt;expr&gt;not client_b.progress_tracker.has_cross_contamination(prompt_id_b)&lt;/expr&gt;" />
+    <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;client_a_messages&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+    <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;client_b_messages&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+    <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;client_a_other&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;expr&gt;f&quot;Client A incorrectly received {len(client_a_other)} progress updates for Client B's workflow&quot;&lt;/expr&gt;" />
+    <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;client_b_other&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;expr&gt;f&quot;Client B incorrectly received {len(client_b_other)} progress updates for Client A's workflow&quot;&lt;/expr&gt;" />
+    <finally>
+      <If condition="hasattr(client_a, 'ws')" />
+      <If condition="hasattr(client_b, 'ws')" />
+    </finally>
+  </try>
+</test_method>

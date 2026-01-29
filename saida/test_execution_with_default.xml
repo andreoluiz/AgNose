@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_execution_with_default">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_preview_method.py</file_path>
+  <assertEquals actual="&lt;literalString&gt;prompt_id&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;response&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;result['completed'] or result['error'] is not None&lt;/expr&gt;" />
+  <If condition="result['completed']" />
+</test_method>

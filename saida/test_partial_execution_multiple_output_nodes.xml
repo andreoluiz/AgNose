@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_partial_execution_multiple_output_nodes">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;input1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;output_node1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;output_node2&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.was_executed&quot;&gt;&lt;expr&gt;save2&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(input2)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(save1)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(save3)&lt;/expr&gt;" />
+</test_method>

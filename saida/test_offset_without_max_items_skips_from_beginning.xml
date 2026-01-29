@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_offset_without_max_items_skips_from_beginning">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <LoopFor condition="_" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;offset_items&lt;/expr&gt;&lt;/call&gt;" actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;all_items&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;2&lt;/literalNumber&gt;" message="&lt;literalString&gt;Offset should skip specified number of items&lt;/literalString&gt;" />
+</test_method>

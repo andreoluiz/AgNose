@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_caching_behavior">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result1.did_run&quot;&gt;&lt;expr&gt;sleep_node&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result2.did_run(sleep_node)&lt;/expr&gt;" />
+  <If condition="not skip_timing_checks">
+    <assertEquals actual="&lt;expr&gt;elapsed_time&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0.1&lt;/literalNumber&gt;" />
+  </If>
+</test_method>

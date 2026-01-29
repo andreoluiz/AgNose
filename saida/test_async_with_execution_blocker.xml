@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_with_execution_blocker">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have blocked second image&lt;/literalString&gt;" />
+</test_method>

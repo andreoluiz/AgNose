@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_lazy_input">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals expected="&lt;call function=&quot;numpy.array(result_image).any&quot; /&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;literalString&gt;Image should be black&lt;/literalString&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;input1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(input2)&lt;/expr&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;mask&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;lazy_mix&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

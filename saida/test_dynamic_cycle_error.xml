@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_dynamic_cycle_error">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <try condition="">
+    <assertEquals actual="&lt;literalNumber&gt;False&lt;/literalNumber&gt;" />
+    <catch type="Exception">
+      <assertEquals actual="&lt;literalString&gt;prompt_id&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;e.args[0]&lt;/expr&gt;" />
+      <assertEquals expected="&lt;expr&gt;e.args[0]['node_id']&lt;/expr&gt;" actual="&lt;expr&gt;generator.id&lt;/expr&gt;" message="&lt;literalString&gt;Error should have been on the generator node&lt;/literalString&gt;" />
+    </catch>
+  </try>
+</test_method>

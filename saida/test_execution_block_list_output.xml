@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_execution_block_list_output">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;output&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;2&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 2 images&lt;/literalString&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images[0]).min() == 0 and numpy.array(images[0]).max() == 0&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images[1]).min() == 0 and numpy.array(images[1]).max() == 0&lt;/expr&gt;" />
+</test_method>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_all_contains_all_statuses">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals actual="&lt;expr&gt;JobStatus.PENDING&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;JobStatus.IN_PROGRESS&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;JobStatus.COMPLETED&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;JobStatus.FAILED&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;JobStatus.CANCELLED&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;JobStatus.ALL&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;5&lt;/literalNumber&gt;" />
+</test_method>

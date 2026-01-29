@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_jobs_api_sorting">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <LoopFor condition="_" />
+  <If condition="len(desc_jobs['jobs']) &gt;= 2">
+    <If condition="len(desc_times) &gt;= 2">
+      <assertEquals expected="&lt;expr&gt;desc_times&lt;/expr&gt;" actual="&lt;call function=&quot;sorted&quot;&gt;&lt;expr&gt;desc_times&lt;/expr&gt;&lt;/call&gt;" message="&lt;literalString&gt;Desc should be newest first&lt;/literalString&gt;" />
+    </If>
+    <If condition="len(asc_times) &gt;= 2">
+      <assertEquals expected="&lt;expr&gt;asc_times&lt;/expr&gt;" actual="&lt;call function=&quot;sorted&quot;&gt;&lt;expr&gt;asc_times&lt;/expr&gt;&lt;/call&gt;" message="&lt;literalString&gt;Asc should be oldest first&lt;/literalString&gt;" />
+    </If>
+  </If>
+</test_method>

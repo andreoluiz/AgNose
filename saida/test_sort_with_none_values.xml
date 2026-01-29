@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_sort_with_none_values">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;result[0]['id']&lt;/expr&gt;" actual="&lt;literalString&gt;b&lt;/literalString&gt;" />
+</test_method>

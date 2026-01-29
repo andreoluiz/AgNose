@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_non_previewable_media_types">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <LoopFor condition="media_type">
+    <assertEquals actual="&lt;call function=&quot;is_previewable&quot;&gt;&lt;expr&gt;media_type&lt;/expr&gt;&lt;dict /&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;False&lt;/literalNumber&gt;" />
+  </LoopFor>
+</test_method>

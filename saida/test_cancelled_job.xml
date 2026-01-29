@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_cancelled_job">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;job['status']&lt;/expr&gt;" actual="&lt;literalString&gt;cancelled&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['execution_start_time']&lt;/expr&gt;" actual="&lt;literalNumber&gt;1234567890500&lt;/literalNumber&gt;" />
+  <assertEquals expected="&lt;expr&gt;job['execution_end_time']&lt;/expr&gt;" actual="&lt;literalNumber&gt;1234567891000&lt;/literalNumber&gt;" />
+  <assertEquals actual="&lt;literalString&gt;execution_error&lt;/literalString&gt;&lt;op value=&quot;&quot; /&gt;&lt;expr&gt;job&lt;/expr&gt;" />
+</test_method>

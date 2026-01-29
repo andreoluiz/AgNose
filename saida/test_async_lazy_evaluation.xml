@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_lazy_evaluation">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <If condition="not skip_timing_checks">
+    <assertEquals actual="&lt;expr&gt;elapsed_time&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0.5&lt;/literalNumber&gt;" />
+  </If>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;sleep1&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;expr&gt;not result.did_run(sleep2)&lt;/expr&gt;" />
+</test_method>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_sync_progress_update_executes">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_public_api.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;progress_node&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;output&lt;/expr&gt;&lt;/call&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have produced 1 image&lt;/literalString&gt;" />
+</test_method>

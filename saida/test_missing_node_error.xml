@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_missing_node_error">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+</test_method>

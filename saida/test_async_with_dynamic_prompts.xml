@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_async_with_dynamic_prompts">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_async_nodes.py</file_path>
+  <If condition="not skip_timing_checks">
+    <assertEquals actual="&lt;expr&gt;elapsed_time&lt;/expr&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;1.0&lt;/literalNumber&gt;" />
+  </If>
+  <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;dynamic_async&lt;/expr&gt;&lt;/call&gt;" />
+</test_method>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_preview_enriched_with_node_metadata">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_jobs.py</file_path>
+  <assertEquals expected="&lt;expr&gt;preview['nodeId']&lt;/expr&gt;" actual="&lt;literalString&gt;node123&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;preview['mediaType']&lt;/expr&gt;" actual="&lt;literalString&gt;images&lt;/literalString&gt;" />
+  <assertEquals expected="&lt;expr&gt;preview['subfolder']&lt;/expr&gt;" actual="&lt;literalString&gt;outputs&lt;/literalString&gt;" />
+</test_method>

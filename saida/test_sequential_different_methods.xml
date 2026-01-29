@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_sequential_different_methods">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_preview_method.py</file_path>
+  <LoopFor condition="method" />
+  <LoopFor condition="r">
+    <assertEquals actual="&lt;expr&gt;r['completed'] or r['error'] is not None&lt;/expr&gt;" />
+  </LoopFor>
+  <If condition="none_result['completed']">
+    <assertEquals expected="&lt;expr&gt;none_result['preview_count']&lt;/expr&gt;" actual="&lt;literalNumber&gt;0&lt;/literalNumber&gt;" message="&lt;expr&gt;f&quot;'none' should have 0 previews, got {none_result['preview_count']}&quot;&lt;/expr&gt;" />
+  </If>
+  <LoopFor condition="r" />
+</test_method>

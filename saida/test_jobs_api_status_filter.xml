@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_jobs_api_status_filter">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;completed_jobs['jobs']&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+  <LoopFor condition="job">
+    <assertEquals expected="&lt;expr&gt;job['status']&lt;/expr&gt;" actual="&lt;literalString&gt;completed&lt;/literalString&gt;" message="&lt;literalString&gt;Should only return completed jobs&lt;/literalString&gt;" />
+  </LoopFor>
+  <LoopFor condition="job">
+    <assertEquals expected="&lt;expr&gt;job['status']&lt;/expr&gt;" actual="&lt;literalString&gt;pending&lt;/literalString&gt;" message="&lt;literalString&gt;Should only return pending jobs&lt;/literalString&gt;" />
+  </LoopFor>
+</test_method>

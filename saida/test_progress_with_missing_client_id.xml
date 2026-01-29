@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_progress_with_missing_client_id">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_progress_isolation.py</file_path>
+  <try condition="">
+    <assertEquals actual="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;messages&lt;/expr&gt;&lt;/call&gt;&lt;op value=&quot;&quot; /&gt;&lt;literalNumber&gt;0&lt;/literalNumber&gt;" />
+    <finally>
+      <If condition="hasattr(client, 'ws')" />
+    </finally>
+  </try>
+</test_method>

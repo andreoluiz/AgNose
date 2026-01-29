@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_offset_zero_equals_no_offset_parameter">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals expected="&lt;expr&gt;with_zero&lt;/expr&gt;" actual="&lt;expr&gt;without_offset&lt;/expr&gt;" message="&lt;literalString&gt;offset=0 should equal no offset&lt;/literalString&gt;" />
+</test_method>

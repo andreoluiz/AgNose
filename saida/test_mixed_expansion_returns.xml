@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_mixed_expansion_returns">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images_dynamic&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;3&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 2 images&lt;/literalString&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images_dynamic[0]).min() == 25 and numpy.array(images_dynamic[0]).max() == 25&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images_dynamic[1]).min() == 51 and numpy.array(images_dynamic[1]).max() == 51&lt;/expr&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images_dynamic[2]).min() == 76 and numpy.array(images_dynamic[2]).max() == 76&lt;/expr&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images_literal&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;3&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 2 images&lt;/literalString&gt;" />
+  <LoopFor condition="i">
+    <assertEquals actual="&lt;expr&gt;numpy.array(images_literal[i]).min() == 255 and numpy.array(images_literal[i]).max() == 255&lt;/expr&gt;" />
+  </LoopFor>
+</test_method>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_is_changed_with_outputs">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 1 image&lt;/literalString&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images[0]).min() == 63 and numpy.array(images[0]).max() == 63&lt;/expr&gt;" />
+  <assertEquals expected="&lt;call function=&quot;len&quot;&gt;&lt;expr&gt;images&lt;/expr&gt;&lt;/call&gt;" actual="&lt;literalNumber&gt;1&lt;/literalNumber&gt;" message="&lt;literalString&gt;Should have 1 image&lt;/literalString&gt;" />
+  <assertEquals actual="&lt;expr&gt;numpy.array(images[0]).min() == 63 and numpy.array(images[0]).max() == 63&lt;/expr&gt;" />
+  <If condition="server['should_cache_results']">
+    <assertEquals actual="&lt;expr&gt;not result.did_run(test_node)&lt;/expr&gt;" />
+    <Else>
+      <assertEquals actual="&lt;call function=&quot;result.did_run&quot;&gt;&lt;expr&gt;test_node&lt;/expr&gt;&lt;/call&gt;" />
+    </Else>
+  </If>
+</test_method>

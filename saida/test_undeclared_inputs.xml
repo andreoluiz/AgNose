@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<test_method name="test_undeclared_inputs">
+  <file_path>C:\Users\andreoluiz\Downloads\ComfyUI-master\ComfyUI-master\tests\execution\test_execution.py</file_path>
+  <assertEquals actual="&lt;expr&gt;numpy.array(result_image).min() == expected and numpy.array(result_image).max() == expected&lt;/expr&gt;" />
+</test_method>
