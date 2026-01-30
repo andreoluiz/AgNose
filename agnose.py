@@ -12,9 +12,6 @@ class Domain:
         try:
             dir_arc = Path(__file__).resolve().parent
             
-            # Lógica de Argumentos ---
-            # Se você digitar 'python agnose.py C:\Pasta\Teste', o sys.argv[1] será esse caminho.
-            # Se não digitar nada, ele usa o os.getcwd()
             if len(sys.argv) > 1:
                 dir_atual = os.path.abspath(sys.argv[1])
             else:
@@ -24,44 +21,69 @@ class Domain:
                 print(f"Erro: O diretório '{dir_atual}' não existe.")
                 return
 
-            print(f"Diretório Alvo: {dir_atual}")
-            print("Gerando XML e Verificando Smells...")
+            print(f"\n--- AgNose: Iniciando Análise Multi-Linguagem ---")
+            print(f"Alvo: {dir_atual}")
 
-            xmlTestGenerator.process_directory(rf"{dir_atual}", "saida")
+            arquivos_encontrados = []
+            for raiz, _, arquivos in os.walk(dir_atual):
+                if 'node_modules' in raiz: continue
+                for f in arquivos:
+                    arquivos_encontrados.append(f)
 
-            java_file = os.path.join(
-                dir_arc, "xmlTestGenerator", "src", "main", "java", "org", "example", "XmlTestConversor.java"
-            )
+            tem_python = any(f.endswith('.py') for f in arquivos_encontrados)
+            tem_java = any(f.endswith('.java') for f in arquivos_encontrados)
+            tem_node = any(f.endswith('.js') or f.endswith('.spec.js') or f.endswith('.test.js') for f in arquivos_encontrados)
 
-            javaparser_jar = os.path.join(
-                dir_arc, "xmlTestGenerator", "target", "maven-status", "javaparser",
-                "javaparser-core", "3.25.10", "javaparser-core-3.25.10.jar"
-            )
+            pasta_saida_xml = os.path.join(dir_atual, "saida")
+            executou_algo = False
 
-            cmd = [
-                "java",
-                "-cp",
-                javaparser_jar,
-                java_file,
-                dir_atual
-            ]
+            if tem_python:
+                print("🐍 [Python] Gerando XML via AST...")
+                xmlTestGenerator.process_directory(dir_atual, pasta_saida_xml)
+                executou_algo = True
 
-            result = subprocess.run(cmd, capture_output=True, text=True)
+            if tem_java:
+                print("☕ [Java] Chamando JavaParser...")
+                java_file = os.path.join(dir_arc, "xmlTestGenerator", "src", "main", "java", "org", "example", "XmlTestConversor.java")
+                jar = os.path.join(dir_arc, "xmlTestGenerator", "target", "maven-status", "javaparser", "javaparser-core", "3.25.10", "javaparser-core-3.25.10.jar")
+                
+                cmd_java = ["java", "-cp", jar, java_file, dir_atual]
+                subprocess.run(cmd_java, capture_output=True, text=True)
+                executou_algo = True
 
-            print(">>> Saída do Java:")
-            print(result.stdout)
+            if tem_node:
+                print("🟢 [Node.js] Chamando Jest-Conversor...")
+                jest_parser = os.path.join(dir_arc, "xmlTestGeneratorNode", "jest-conversor.js")
+                
+                if os.path.exists(jest_parser):
+                    res = subprocess.run(["node", jest_parser, dir_atual], capture_output=True, text=True, shell=True)
+                    if res.stderr:
+                        print(f"⚠️ Log/Erro do Node: {res.stderr}")
+                    executou_algo = True
+                else:
+                    print(f"❌ Erro: Conversor Node não encontrado em: {jest_parser}")
 
-            if result.stderr:
-                print(">>> Erro do Java:")
-                print(result.stderr)
-
-            Detector.Detector(dir_atual)
-            
-            csv_path = os.path.join(dir_atual, "output.csv")
-            CSVViewerApp(caminho_csv=csv_path, caminho_icon=rf"{dir_arc}\agnose.png")
+            if executou_algo:
+                print("🔍 Executando Detector de Smells...")
+                Detector.Detector(dir_atual)
+                
+                csv_na_raiz = os.path.join(dir_arc, "output.csv")
+                csv_no_alvo = os.path.join(dir_atual, "output.csv")
+                
+                if os.path.exists(csv_na_raiz):
+                    if os.path.exists(csv_no_alvo): os.remove(csv_no_alvo)
+                    os.rename(csv_na_raiz, csv_no_alvo)
+                
+                if os.path.exists(csv_no_alvo):
+                    print(f"✅ Análise concluída. Abrindo relatório...")
+                    CSVViewerApp(caminho_csv=csv_no_alvo, caminho_icon=os.path.join(dir_arc, "agnose.png"))
+                else:
+                    print(f"❌ Erro: O arquivo output.csv não foi gerado.")
+            else:
+                print("Nenhuma linguagem suportada encontrada no diretório informado.")
 
         except Exception as e:
-            print(f"Erro na execução do gerador: {e}")
+            print(f"Erro crítico no AgNose: {e}")
 
 if __name__ == "__main__":
     Domain.createGenerator()
